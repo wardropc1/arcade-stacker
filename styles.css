@@ -445,75 +445,84 @@ input {
 @media (max-width: 560px) {
   .arcade {
     align-items: start;
-    padding: 6px;
+    padding: 3px;
   }
 
   .cabinet {
-    padding: 8px;
-    border-width: 4px;
+    padding: 6px;
+    border-width: 3px;
   }
 
   .explain-tab {
     position: static;
     width: 100%;
-    margin-bottom: 6px;
+    margin-bottom: 4px;
   }
 
   .explain-tab summary {
-    min-height: 32px;
+    min-height: 28px;
     border-left: 3px solid #050505;
     border-radius: 6px;
   }
 
   .explain-content {
     width: 100%;
-    padding: 9px;
-    font-size: 0.8rem;
+    padding: 7px;
+    font-size: 0.74rem;
   }
 
   .marquee {
-    min-height: 48px;
-    gap: 10px;
+    min-height: 40px;
+    gap: 8px;
+    font-size: clamp(1.25rem, 8vw, 1.75rem);
   }
 
   .marquee-light {
-    width: 13px;
-    height: 13px;
+    width: 11px;
+    height: 11px;
   }
 
   .screen-wrap {
-    margin-top: 8px;
-    padding: 8px;
+    margin-top: 6px;
+    padding: 6px;
   }
 
   .scoreboard {
-    gap: 6px;
-    margin-bottom: 7px;
+    gap: 5px;
+    margin-bottom: 5px;
   }
 
   .scoreboard > div {
-    padding: 6px 8px;
+    padding: 5px 7px;
   }
 
   .label {
-    font-size: 0.65rem;
+    font-size: 0.6rem;
+  }
+
+  .scoreboard strong {
+    font-size: 0.78rem;
   }
 
   .controls {
-    grid-template-columns: 1fr;
-    gap: 7px;
-    margin-top: 8px;
+    grid-template-columns: 1fr 1fr;
+    gap: 6px;
+    margin-top: 6px;
+  }
+
+  .secondary-button {
+    grid-column: 1 / -1;
   }
 
   .control-panel {
     justify-content: stretch;
-    margin-top: 8px;
+    margin-top: 6px;
   }
 
   .difficulty-control {
     grid-template-columns: 1fr;
     width: 100%;
-    gap: 5px;
+    gap: 4px;
   }
 
   .difficulty-buttons {
@@ -521,7 +530,8 @@ input {
   }
 
   .difficulty-button {
-    min-height: 32px;
+    min-height: 28px;
+    font-size: 0.78rem;
   }
 
   .scoreboard {
@@ -530,47 +540,49 @@ input {
 
   .play-area {
     grid-template-columns: 1fr;
-    gap: 7px;
+    gap: 5px;
     justify-items: center;
   }
 
   .screen {
-    width: min(100%, 260px);
+    width: min(100%, 220px);
   }
 
   .money-panel {
     grid-template-columns: auto 1fr auto auto;
     align-items: center;
     width: 100%;
-    gap: 7px;
-    padding: 8px;
+    gap: 5px;
+    padding: 6px;
   }
 
   .money-panel strong {
-    font-size: 1.25rem;
+    font-size: 1.05rem;
   }
 
   .money-rules {
     grid-column: 1 / -1;
     grid-template-columns: repeat(3, 1fr);
-    gap: 4px;
-    padding-top: 6px;
-    font-size: 0.7rem;
+    gap: 3px;
+    padding-top: 4px;
+    font-size: 0.62rem;
   }
 
   .bet-control input {
-    min-height: 30px;
+    min-height: 26px;
+    font-size: 0.78rem;
   }
 
   .start-button,
   .lock-button,
   .secondary-button {
-    min-height: 42px;
+    min-height: 36px;
+    font-size: 0.86rem;
   }
 
   .status {
-    min-height: 20px;
-    margin-top: 8px;
-    font-size: 0.86rem;
+    min-height: 18px;
+    margin-top: 6px;
+    font-size: 0.76rem;
   }
 }
