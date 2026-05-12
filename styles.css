@@ -472,9 +472,9 @@ input {
   }
 
   .marquee {
-    min-height: 40px;
+    min-height: 36px;
     gap: 8px;
-    font-size: clamp(1.25rem, 8vw, 1.75rem);
+    font-size: clamp(1.15rem, 7vw, 1.55rem);
   }
 
   .marquee-light {
@@ -483,8 +483,8 @@ input {
   }
 
   .screen-wrap {
-    margin-top: 6px;
-    padding: 6px;
+    margin-top: 5px;
+    padding: 5px;
   }
 
   .scoreboard {
@@ -493,7 +493,7 @@ input {
   }
 
   .scoreboard > div {
-    padding: 5px 7px;
+    padding: 4px 6px;
   }
 
   .label {
@@ -501,7 +501,7 @@ input {
   }
 
   .scoreboard strong {
-    font-size: 0.78rem;
+    font-size: 0.72rem;
   }
 
   .controls {
@@ -535,34 +535,42 @@ input {
   }
 
   .scoreboard {
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr 1fr;
   }
 
   .play-area {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 170px) minmax(0, 1fr);
+    align-items: stretch;
     gap: 5px;
-    justify-items: center;
+    justify-items: stretch;
   }
 
   .screen {
-    width: min(100%, 220px);
+    width: min(100%, 170px);
   }
 
   .money-panel {
-    grid-template-columns: auto 1fr auto auto;
-    align-items: center;
+    grid-template-columns: 1fr;
+    align-content: start;
     width: 100%;
     gap: 5px;
     padding: 6px;
   }
 
   .money-panel strong {
-    font-size: 1.05rem;
+    font-size: 0.98rem;
+  }
+
+  .bet-toggle {
+    font-size: 0.7rem;
+  }
+
+  .bet-control span {
+    font-size: 0.58rem;
   }
 
   .money-rules {
-    grid-column: 1 / -1;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: 1fr;
     gap: 3px;
     padding-top: 4px;
     font-size: 0.62rem;
@@ -576,8 +584,8 @@ input {
   .start-button,
   .lock-button,
   .secondary-button {
-    min-height: 36px;
-    font-size: 0.86rem;
+    min-height: 34px;
+    font-size: 0.8rem;
   }
 
   .status {
