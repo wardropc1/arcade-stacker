@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Stacker Arcade</title>
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <main class="arcade">
+      <section class="cabinet" aria-label="Stacker arcade game">
+        <details class="explain-tab">
+          <summary>Explain</summary>
+          <div class="explain-content">
+            <p>Press Begin to start movement. Press Stop to pause, or Space to lock the moving row.</p>
+            <p>Only blocks directly above the previous row survive. Missing the stack ends the round.</p>
+            <p>Reach the minor prize to cash out or continue. Reach the top row to win the major prize.</p>
+            <p>Standard rewards are +$10 minor, +$50 major, and -$1 on a miss. Betting mode replaces those rewards with the selected wager.</p>
+          </div>
+        </details>
+
+        <header class="marquee">
+          <span>STACKER</span>
+          <span class="marquee-light"></span>
+          <span>ARCADE</span>
+        </header>
+
+        <div class="screen-wrap">
+          <div class="scoreboard">
+            <div>
+              <span class="label">Level</span>
+              <strong id="levelReadout">1 / 15</strong>
+            </div>
+            <div>
+              <span class="label">Prize</span>
+              <strong id="prizeReadout">Keep stacking</strong>
+            </div>
+          </div>
+
+          <div class="play-area">
+            <div class="screen" id="screen">
+              <div class="grid" id="grid" aria-label="LED stacker board"></div>
+              <div class="win-overlay" id="winOverlay" aria-hidden="true">WIN</div>
+            </div>
+
+            <aside class="money-panel" aria-label="Money total">
+              <span class="label">Money</span>
+              <strong id="moneyReadout">$10</strong>
+              <label class="bet-toggle">
+                <input id="bettingToggle" type="checkbox">
+                <span>Betting</span>
+              </label>
+              <label class="bet-control">
+                <span>Bet</span>
+                <input id="betInput" type="number" min="0" max="0" step="1" value="0" disabled>
+              </label>
+              <div class="money-rules">
+                <span>Minor +$10</span>
+                <span>Major +$50</span>
+                <span>Miss -$1</span>
+              </div>
+            </aside>
+          </div>
+        </div>
+
+        <div class="control-panel">
+          <div class="difficulty-control" aria-label="Difficulty">
+            <span>Difficulty</span>
+            <div class="difficulty-buttons" role="group" aria-label="Difficulty">
+              <button class="difficulty-button active" type="button" data-difficulty="easy" aria-pressed="true">Easy</button>
+              <button class="difficulty-button" type="button" data-difficulty="medium" aria-pressed="false">Medium</button>
+              <button class="difficulty-button" type="button" data-difficulty="hard" aria-pressed="false">Hard</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="controls">
+          <button class="start-button" id="stopButton" type="button">Begin</button>
+          <button class="secondary-button" id="minorButton" type="button" disabled>Take Minor Prize</button>
+        </div>
+
+        <p class="status" id="statusText">Press Begin or Space to start.</p>
+      </section>
+    </main>
+
+    <script src="game.js"></script>
+  </body>
+</html>
