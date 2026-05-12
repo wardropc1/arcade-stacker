@@ -12,7 +12,7 @@
         <details class="explain-tab">
           <summary>Explain</summary>
           <div class="explain-content">
-            <p>Press Begin to start movement. Press Stop to pause, or Space to lock the moving row.</p>
+            <p>Press Begin to start movement. Press Stop to reset the round, then press Space or tap Lock to place the moving row.</p>
             <p>Only blocks directly above the previous row survive. Missing the stack ends the round.</p>
             <p>Reach the minor prize to cash out or continue. Reach the top row to win the major prize.</p>
             <p>Standard rewards are +$10 minor, +$50 major, and -$1 on a miss. Betting mode replaces those rewards with the selected wager.</p>
@@ -76,10 +76,11 @@
 
         <div class="controls">
           <button class="start-button" id="stopButton" type="button">Begin</button>
+          <button class="lock-button" id="lockButton" type="button">Lock</button>
           <button class="secondary-button" id="minorButton" type="button" disabled>Take Minor Prize</button>
         </div>
 
-        <p class="status" id="statusText">Press Begin or Space to start.</p>
+        <p class="status" id="statusText">Press Begin, Space, or Lock to start.</p>
       </section>
     </main>
 

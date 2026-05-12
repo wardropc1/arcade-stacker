@@ -1,4 +1,4 @@
-const COLS = 13;
+const COLS = 11;
 const ROWS = 16;
 const FINAL_LEVEL = 15;
 const MINOR_LEVEL = 10;
@@ -12,6 +12,7 @@ const bettingToggle = document.querySelector("#bettingToggle");
 const betInput = document.querySelector("#betInput");
 const statusText = document.querySelector("#statusText");
 const stopButton = document.querySelector("#stopButton");
+const lockButton = document.querySelector("#lockButton");
 const minorButton = document.querySelector("#minorButton");
 const moneyRules = document.querySelector(".money-rules");
 const difficultyButtons = document.querySelectorAll(".difficulty-button");
@@ -52,7 +53,6 @@ function speedForLevel(level) {
 
 function prizeForLevel(level) {
   if (state === "minor") return "Minor prize ready";
-  if (state === "paused") return "Paused";
   if (state === "ready") return "Ready";
   if (level > FINAL_LEVEL) return "Major prize";
   if (level > MINOR_LEVEL) return "Major run";
@@ -173,7 +173,7 @@ function render() {
     }
   }
 
-  if (state === "playing" || state === "ready" || state === "paused") {
+  if (state === "playing" || state === "ready") {
     const row = rowForLevel(currentLevel);
     for (const col of currentBlocks) {
       cellAt(row, col).classList.add("block");
@@ -195,6 +195,10 @@ function setPrimaryButtonLabel() {
   stopButton.textContent = "Begin";
 }
 
+function setLockButtonLabel() {
+  lockButton.textContent = state === "minor" ? "Continue" : "Lock";
+}
+
 function readyMessage() {
   if (roundBet > 0) {
     return `Betting mode active: ${formatMoney(roundBet)} wager locked. Press Begin to start.`;
@@ -204,7 +208,7 @@ function readyMessage() {
     return "Betting mode is on, but you need money before a wager can be locked.";
   }
 
-  return "Press Begin or Space to start.";
+  return "Press Begin, Space, or Lock to start.";
 }
 
 function makeBlocks(start, count) {
@@ -267,6 +271,7 @@ function prepareRound() {
   stopButton.disabled = false;
   setStartingBlocks();
   setPrimaryButtonLabel();
+  setLockButtonLabel();
   setReadouts(readyMessage());
   render();
 }
@@ -275,24 +280,14 @@ function startRound() {
   if (state !== "ready") return;
   state = "playing";
   setPrimaryButtonLabel();
+  setLockButtonLabel();
   startMovingRow();
 }
 
-function pauseRound() {
+function resetActiveRound() {
   if (state !== "playing") return;
-  window.clearInterval(timerId);
-  state = "paused";
-  setPrimaryButtonLabel();
-  setReadouts("Paused. Press Begin to resume, or Space to lock this row.");
-  render();
-}
-
-function resumeRound() {
-  if (state !== "paused") return;
-  state = "playing";
-  setPrimaryButtonLabel();
-  setReadouts("Row moving. Press Space to lock it.");
-  startRowTimer(blockCountForLevel(currentLevel));
+  prepareRound();
+  setReadouts("Round reset. Press Begin to start again.");
 }
 
 function pauseForMinorPrize() {
@@ -300,7 +295,8 @@ function pauseForMinorPrize() {
   state = "minor";
   minorButton.disabled = false;
   setPrimaryButtonLabel();
-  setReadouts("Minor prize reached. Take it, or press Continue / Space to go for the major prize.");
+  setLockButtonLabel();
+  setReadouts("Minor prize reached. Take it, or press Continue / Lock / Space to go for the major prize.");
   render();
 }
 
@@ -313,6 +309,7 @@ function finishGame(message, won = false) {
   screen.classList.toggle("win", won);
   updateBetControls();
   setPrimaryButtonLabel();
+  setLockButtonLabel();
   setReadouts(message);
   render();
 }
@@ -323,16 +320,12 @@ function continuePastMinorPrize() {
   currentLevel += 1;
   minorButton.disabled = true;
   setPrimaryButtonLabel();
+  setLockButtonLabel();
   setReadouts("Going for the major prize.");
   startMovingRow();
 }
 
 function lockCurrentRow() {
-  if (state === "paused") {
-    state = "playing";
-    setPrimaryButtonLabel();
-  }
-
   if (state !== "playing") return;
 
   window.clearInterval(timerId);
@@ -388,12 +381,17 @@ function handlePrimaryAction() {
     return;
   }
 
-  if (state === "paused") {
-    resumeRound();
-    return;
-  }
+  resetActiveRound();
+}
 
-  pauseRound();
+function handleLockAction() {
+  if (state === "ready" || state === "over" || state === "won") {
+    handlePrimaryAction();
+  } else if (state === "minor") {
+    continuePastMinorPrize();
+  } else {
+    lockCurrentRow();
+  }
 }
 
 function takeMinorPrize() {
@@ -405,6 +403,10 @@ function takeMinorPrize() {
 stopButton.addEventListener("click", () => {
   stopButton.blur();
   handlePrimaryAction();
+});
+lockButton.addEventListener("click", () => {
+  lockButton.blur();
+  handleLockAction();
 });
 minorButton.addEventListener("click", takeMinorPrize);
 bettingToggle.addEventListener("change", updateBetControls);
@@ -420,13 +422,7 @@ window.addEventListener("keydown", (event) => {
   if (event.code === "Space") {
     if (event.target.closest("button, input, summary")) return;
     event.preventDefault();
-    if (state === "ready" || state === "over" || state === "won") {
-      handlePrimaryAction();
-    } else if (state === "minor") {
-      continuePastMinorPrize();
-    } else {
-      lockCurrentRow();
-    }
+    handleLockAction();
   }
 
   if (event.key.toLowerCase() === "r") {
