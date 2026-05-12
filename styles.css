@@ -539,14 +539,14 @@ input {
   }
 
   .play-area {
-    grid-template-columns: minmax(0, 170px) minmax(0, 1fr);
+    grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
     align-items: stretch;
     gap: 5px;
     justify-items: stretch;
   }
 
   .screen {
-    width: min(100%, 170px);
+    width: 100%;
   }
 
   .money-panel {

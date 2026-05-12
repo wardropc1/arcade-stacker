@@ -18,7 +18,7 @@ const moneyRules = document.querySelector(".money-rules");
 const difficultyButtons = document.querySelectorAll(".difficulty-button");
 
 const DIFFICULTY_SPEEDS = {
-  easy: 1,
+  easy: 1.1,
   medium: 0.85,
   hard: 0.72,
 };
